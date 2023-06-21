@@ -1,9 +1,13 @@
-import Header from "./components/Header"
+import Header from "./components/Header";
+import HomeScreen from "./screens/HomeScreen"
 
 const App = () => {
   return (
-    <div><Header /></div>
-  )
-}
+    <>
+      <Header />
+      <HomeScreen />
+    </>
+  );
+};
 
-export default App
+export default App;

@@ -15,7 +15,7 @@ const Header = () => {
               <Nav.Link href="/login">
                 <FaSignInAlt /> Sign In
               </Nav.Link>
-              <Nav.Link href="/login">
+              <Nav.Link href="/register">
                 <FaSignOutAlt /> Sign up
               </Nav.Link>
             </Nav>
