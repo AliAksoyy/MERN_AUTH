@@ -60,7 +60,7 @@ const logoutUser = expressAsyncHandler(async (req, res) => {
     expires: new Date(0),
   });
 
-  res.status(200).json({message:"User logout"})
+  res.status(200).json({ message: "User logout" });
 });
 
 /***@description Get user profile
@@ -69,7 +69,12 @@ const logoutUser = expressAsyncHandler(async (req, res) => {
  */
 
 const getUserProfile = expressAsyncHandler(async (req, res) => {
-  res.status(200).json({ message: "Get User" });
+  const user = {
+    _id: req.user._id,
+    name: req.user.name,
+    email: req.user.email,
+  };
+  res.status(200).json(user);
 });
 /***@description Update user profile
  * route PUT /api/users/profile
@@ -77,7 +82,25 @@ const getUserProfile = expressAsyncHandler(async (req, res) => {
  */
 
 const updateUserProfile = expressAsyncHandler(async (req, res) => {
-  res.status(200).json({ message: "UpdateUserProfile User" });
+  const user = await User.findById(req.user._id);
+
+  if (user) {
+    user.name = req.body.name || user.name;
+    user.email = req.body.email || user.email;
+    if (req.body.password) {
+      user.password = req.body.password;
+    }
+    const updateUser = await user.save();
+    
+    res.status(200).json({
+      _id: updateUser._id,
+      password: updateUser.password,
+      email: updateUser.email,
+    });
+  } else {
+    res.status(404);
+    throw new Error("User not Found");
+  }
 });
 
 export {
