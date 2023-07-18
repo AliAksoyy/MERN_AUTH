@@ -9,8 +9,8 @@ import {
 
 const userRoutes = express.Router();
 
-userRoutes.post("/auth", authUser);
 userRoutes.post("/", registerUser);
+userRoutes.post("/auth", authUser);
 userRoutes.post("/logout", logoutUser);
 userRoutes.get("/profile", getUserProfile);
 userRoutes.put("/profile", updateUserProfile);
